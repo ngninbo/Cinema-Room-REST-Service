@@ -5,6 +5,7 @@ import cinema.model.Purchase;
 import cinema.model.PurchasedTicket;
 import cinema.model.Ticket;
 import cinema.service.CinemaService;
+import cinema.util.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,7 @@ public class CinemaController {
 
     public CinemaController(@Autowired CinemaService cinemaService) {
         this.cinemaService = cinemaService;
-        error.put("error", "");
+        error.put("error", Message.EMPTY_ERROR);
     }
 
     @GetMapping("/seats")
@@ -38,18 +39,18 @@ public class CinemaController {
             if (ticket != null) {
                 return new ResponseEntity<>(ticket, HttpStatus.OK);
             } else {
-                error.replace("error", "The ticket has been already purchased!");
+                error.replace("error", Message.PURCHASE_ERROR);
                 return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
             }
         } else {
-            error.replace("error", "The number of a row or a column is out of bounds!");
+            error.replace("error", Message.OUT_OF_BOUND_ERROR);
             return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
         }
     }
 
     @PostMapping("/return")
     public ResponseEntity<?> refund(@RequestBody Map<String, String> token) {
-        error.replace("error", "Wrong token!");
+        error.replace("error", Message.WRONG_TOKEN);
         Map<String, Ticket> refundTicket = cinemaService.refund(token);
 
         if (refundTicket != null) {
@@ -61,7 +62,7 @@ public class CinemaController {
 
     @PostMapping("/stats")
     public ResponseEntity<?> statistic(@RequestParam("password") Optional<String> password) {
-        error.replace("error", "The password is wrong!");
+        error.replace("error", Message.WRONG_PASSWORD);
 
         if (password.isPresent() && !"".equals(password.get())) {
             return new ResponseEntity<>(cinemaService.getStats(), HttpStatus.OK);
