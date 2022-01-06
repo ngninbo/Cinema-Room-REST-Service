@@ -1,0 +1,40 @@
+<p><div class="alert alert-warning">This problem is fully supported by version 2021.9 of the EduTools plugin and newer. To avoid possible errors, please make sure that the plugin is updated. Alternatively, you can solve it using the web interface.</div></p>
+
+<p>In this task, you have to implement a simple service that stores one message.</p>
+
+<p>The program should contain the following two endpoints:</p>
+
+<ul>
+	<li><code class="language-json">POST /message</code> —  receives a JSON object with one field <code class="language-json">importantMessage</code> (String) and stores the message.</li>
+	<li><code class="language-json">GET /message</code> —  returns the newest message as a JSON object with one field <code class="language-json">importantMessage</code> (String).</li>
+</ul>
+
+<p>In both cases, the server should respond with <code class="language-json">200 OK</code> status code.</p>
+
+<p><strong>Example 1</strong>: <code class="language-json">POST /message</code> request with the following body:</p>
+
+<pre><code class="language-json">{
+   "importantMessage": "a28957asdf792347f",
+}</code></pre>
+
+<p><strong>Example 2</strong>: <code class="language-json">GET /message</code> request</p>
+
+<p>Response:</p>
+
+<pre><code class="language-json">{
+   "importantMessage": "a28957asdf792347f",
+}</code></pre>
+
+<p><strong>Example 3</strong>: <code class="language-json">POST /message</code> request with the following body:</p>
+
+<pre><code class="language-json">{
+   "importantMessage": "zxcvlj243243l",
+}</code></pre>
+
+<p><strong>Example 4</strong>: <code class="language-json">GET /message</code> request</p>
+
+<p>Response:</p>
+
+<pre><code class="language-json">{
+   "importantMessage": "zxcvlj243243l",
+}</code></pre>

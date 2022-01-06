@@ -1,0 +1,118 @@
+type: edu
+files:
+- name: src/task/Main.java
+  visible: false
+  text: |-
+    package task;
+
+    import org.springframework.boot.SpringApplication;
+    import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+    @SpringBootApplication
+    public class Main {
+        public static void main(String[] args) {
+            SpringApplication.run(Main.class, args);
+        }
+    }
+  learner_created: false
+- name: build.gradle
+  visible: false
+  text: |-
+    plugins {
+        id 'java'
+        id 'org.springframework.boot' version '2.3.1.RELEASE'
+        id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+    }
+
+    repositories {
+        mavenCentral()
+        maven { url "https://jitpack.io" }
+    }
+
+    sourceSets.main.resources.srcDirs = ["resources"]
+
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter'
+        implementation 'org.springframework.boot:spring-boot-starter-actuator'
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+    }
+  learner_created: false
+- name: resources/application.properties
+  visible: false
+  text: |-
+    server.port=28852
+    management.endpoints.web.exposure.include=*
+    management.endpoint.shutdown.enabled=true
+  learner_created: false
+- name: src/task/Controller.java
+  visible: true
+  text: |
+    package task;
+
+    import org.springframework.web.bind.annotation.*;
+
+    public class Controller {
+
+    }
+  learner_created: false
+- name: test/Tests.java
+  visible: false
+  text: |-
+    import org.hyperskill.hstest.dynamic.DynamicTest;
+    import org.hyperskill.hstest.dynamic.input.DynamicTesting;
+    import org.hyperskill.hstest.exception.outcomes.WrongAnswer;
+    import org.hyperskill.hstest.mocks.web.response.HttpResponse;
+    import org.hyperskill.hstest.stage.SpringTest;
+
+    import org.hyperskill.hstest.testcase.CheckResult;
+    import task.Main;
+
+    import java.util.Map;
+
+    import static org.hyperskill.hstest.testcase.CheckResult.wrong;
+    import static org.hyperskill.hstest.testcase.CheckResult.correct;
+
+
+    public class Tests extends SpringTest {
+
+        public Tests() {
+            super(Main.class);
+        }
+
+        static void throwIfIncorrectStatusCode(HttpResponse response, int status) {
+            if (response.getStatusCode() != status) {
+                throw new WrongAnswer(response.getRequest().getMethod() +
+                        " " + response.getRequest().getLocalUri() +
+                        " should respond with status code " + status +
+                        ", responded: " + response.getStatusCode() + "\n\n" +
+                        "Response body:\n" + response.getContent());
+            }
+        }
+
+
+        @DynamicTest
+        DynamicTesting[] dt = new DynamicTesting[]{
+                () -> testPost("abc"),
+                () -> testPost("123"),
+        };
+
+        CheckResult testPost(String value) {
+            HttpResponse response = post("/test", Map.of("param", value)).send();
+
+            throwIfIncorrectStatusCode(response, 200);
+
+            if (!value.equals(response.getContent())) {
+                return wrong("Expected: \"" + value + "\", received: \"" + response.getContent() + "\"");
+            }
+
+            return correct();
+        }
+
+    }
+  learner_created: false
+feedback_link: https://hyperskill.org/learn/step/14601#comment
+status: Solved
+feedback:
+  message: Congratulations!
+  time: Thu, 04 Nov 2021 07:04:18 UTC
+record: -1

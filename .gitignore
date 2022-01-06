@@ -1,0 +1,46 @@
+# Project exclude paths
+/.gradle/
+/Cinema Room REST Service/task/build/
+/Cinema Room REST Service/task/out/
+/Cinema Room REST Service/task/out/production/classes/
+/Topics/ArrayList/Creating list/build/
+/Topics/ArrayList/Creating list/out/
+/Topics/ArrayList/Creating list/out/production/classes/
+/Topics/Exception handling/Converting and multiplying/out/
+/Topics/Exception handling/Converting and multiplying/out/production/classes/
+/Topics/Exception handling/Four status codes/build/
+/Topics/Exception handling/Implement DELETE endpoint/build/
+/Topics/Exception handling/Improve the program/build/
+/Topics/Getting data from REST/Add annotations/build/
+/Topics/Getting data from REST/Getting all tasks/build/
+/Topics/Getting data from REST/Receive and return ID/build/
+/Topics/Getting data from REST/Retrieving specific task/build/
+/Topics/Getting data from REST/Return big JSON/build/
+/Topics/Getting data from REST/Three endpoints/build/
+/Topics/Getting data from REST/Two endpoints/build/
+/Topics/Getting data from REST/Welcome/build/
+/Topics/Handling requests with bodies/Adding new functionality/build/
+/Topics/Handling requests with bodies/Important message/build/
+/Topics/Handling requests with bodies/Receiving and returning products/build/
+/Topics/Multidimensional array/Symmetric matrix/out/
+/Topics/Multidimensional array/Symmetric matrix/out/production/classes/
+/Topics/Posting and deleting data via REST/Deleting items/build/
+/Topics/Posting and deleting data via REST/Return query parameter/build/
+/Topics/Posting and deleting data via REST/Storing user names/build/
+/Topics/Posting and deleting data via REST/Web calculator/build/
+/Topics/The Collections Framework overview/Blacklist/out/
+/Topics/The Collections Framework overview/Blacklist/out/production/classes/
+/Topics/The Collections Framework overview/Squares list/out/
+/Topics/The Collections Framework overview/Squares list/out/production/classes/
+/Topics/The List interface/Backward indexes/out/
+/Topics/The List interface/Backward indexes/out/production/classes/
+/Topics/The List interface/Companies/out/
+/Topics/The List interface/Companies/out/production/classes/
+/Topics/The List interface/Filtering the list/out/
+/Topics/The List interface/Filtering the list/out/production/classes/
+/Topics/The List interface/Greek letters/out/
+/Topics/The List interface/Greek letters/out/production/classes/
+/Topics/The List interface/Split a list into sublists/out/
+/Topics/The List interface/Split a list into sublists/out/production/classes/
+/Topics/The List interface/The longest string in the list/out/
+/Topics/The List interface/The longest string in the list/out/production/classes/

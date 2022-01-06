@@ -1,0 +1,38 @@
+<p><div class="alert alert-warning">This problem is fully supported by version 2021.9 of the EduTools plugin and newer. To avoid possible errors, please make sure that the plugin is updated. Alternatively, you can solve it using the web interface.</div></p>
+
+<p>In this task, you'll practice returning status codes. As you probably know, there are five groups of response status codes:</p>
+
+<ul>
+	<li>Informational responses (100–199)</li>
+	<li>Successful responses (200–299)</li>
+	<li>Redirects (300–399)</li>
+	<li>Client errors (400–499)</li>
+	<li>Server errors (500–599)</li>
+</ul>
+
+<p>Your task is to implement the following test endpoint:</p>
+
+<ul>
+	<li><code class="java">GET /test/{status}</code> – responds with a specified status code.</li>
+</ul>
+
+<p>The endpoint should support at least these 4 status codes:</p>
+
+<ul>
+	<li><code class="java">200</code> – if this number is specified responds with <code class="java">200 OK</code></li>
+	<li><code class="java">300</code> – if this number is specified responds with <code class="java">300 Multiple Choices</code></li>
+	<li><code class="java">400</code> – if this number is specified responds with <code class="java">400 Bad Request</code></li>
+	<li><code class="java">500</code> – if this number is specified responds with <code class="java">500 Internal Server Error</code></li>
+</ul>
+
+<p><strong>Example 1:</strong></p>
+
+<p>Request: <code class="java">GET /test/500</code></p>
+
+<p>Status code: <code class="java">500 Internal Server Error</code></p>
+
+<p><strong>Example 2:</strong></p>
+
+<p>Request: <code class="java">GET /test/300</code></p>
+
+<p>Status code: <code class="java">300 Multiple Choices</code></p>

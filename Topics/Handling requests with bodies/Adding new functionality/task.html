@@ -1,0 +1,53 @@
+<p><div class="alert alert-warning">This problem is fully supported by version 2021.9 of the EduTools plugin and newer. To avoid possible errors, please make sure that the plugin is updated. Alternatively, you can solve it using the web interface.</div></p>
+
+<p>In this task, you need to improve the program that stores data. Currently, the program has one endpoint:</p>
+
+<ul>
+	<li><code class="language-json">GET /api/data/{id}</code> — returns data with a specified <code class="language-json">id</code> as a JSON object with one field <code class="language-json">data</code> (String).</li>
+</ul>
+
+<p>Your task is to analyze the code and add a new functionality:</p>
+
+<ul>
+	<li><code class="language-json">POST /api/data/new</code> — receives a JSON object with one field <code class="language-json">data</code> (String), then generates a unique integer <code class="language-json">id</code> and puts the received data together with generated <code class="language-json">id</code> into the <code class="language-json">map</code>. After that, the program should return a JSON object with one field <code class="language-json">id</code>. The status code should be <code class="language-json">200 OK</code>.</li>
+</ul>
+
+<p><strong>Example 1</strong>: <code class="language-json">POST /api/data/new</code> request with the following body:</p>
+
+<pre><code class="language-json">{
+   "data": "something1",
+}</code></pre>
+
+<p>Response:</p>
+
+<pre><code class="language-json">{
+   "id": 1
+}</code></pre>
+
+<p><strong>Example 2</strong>: <code class="language-json">POST /api/data/new</code> request with the following body:</p>
+
+<pre><code class="language-json">{
+   "data": "something2",
+}</code></pre>
+
+<p>Response:</p>
+
+<pre><code class="language-json">{
+   "id": 2
+}</code></pre>
+
+<p><strong>Example 3</strong>: <code class="language-json">GET /api/data/1</code> request</p>
+
+<p>Response:</p>
+
+<pre><code class="language-json">{
+   "data": "something1",
+}</code></pre>
+
+<p><strong>Example 4</strong>: <code class="language-json">GET /api/data/2</code> request</p>
+
+<p>Response:</p>
+
+<pre><code class="language-json">{
+   "data": "something2",
+}</code></pre>

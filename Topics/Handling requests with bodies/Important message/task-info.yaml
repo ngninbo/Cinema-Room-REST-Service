@@ -1,0 +1,164 @@
+type: edu
+files:
+- name: src/task/Main.java
+  visible: false
+  text: |-
+    package task;
+
+    import org.springframework.boot.SpringApplication;
+    import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+    @SpringBootApplication
+    public class Main {
+        public static void main(String[] args) {
+            SpringApplication.run(Main.class, args);
+        }
+    }
+  learner_created: false
+- name: build.gradle
+  visible: false
+  text: |-
+    plugins {
+        id 'java'
+        id 'org.springframework.boot' version '2.3.1.RELEASE'
+        id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+    }
+
+    repositories {
+        mavenCentral()
+        maven { url "https://jitpack.io" }
+    }
+
+    sourceSets.main.resources.srcDirs = ["resources"]
+
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter'
+        implementation 'org.springframework.boot:spring-boot-starter-actuator'
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+    }
+  learner_created: false
+- name: resources/application.properties
+  visible: false
+  text: |-
+    server.port=28852
+    management.endpoints.web.exposure.include=*
+    management.endpoint.shutdown.enabled=true
+  learner_created: false
+- name: src/task/Controller.java
+  visible: true
+  text: |
+    package task;
+
+    import org.springframework.web.bind.annotation.*;
+
+    @RestController
+    public class Controller {
+
+    }
+  learner_created: false
+- name: test/Tests.java
+  visible: false
+  text: |-
+    import org.hyperskill.hstest.dynamic.DynamicTest;
+    import org.hyperskill.hstest.dynamic.input.DynamicTesting;
+    import org.hyperskill.hstest.exception.outcomes.WrongAnswer;
+    import org.hyperskill.hstest.mocks.web.response.HttpResponse;
+    import org.hyperskill.hstest.stage.SpringTest;
+
+    import static org.hyperskill.hstest.testing.expect.json.JsonChecker.*;
+    import static org.hyperskill.hstest.testing.expect.Expectation.expect;
+
+    import org.hyperskill.hstest.testcase.CheckResult;
+    import task.Main;
+
+    import java.util.Random;
+
+    import static org.hyperskill.hstest.testcase.CheckResult.correct;
+
+
+    import com.google.gson.Gson;
+
+
+    public class Tests extends SpringTest {
+
+        public Tests() {
+            super(Main.class);
+        }
+
+        static void throwIfIncorrectStatusCode(HttpResponse response, int status) {
+            if (response.getStatusCode() != status) {
+                throw new WrongAnswer(response.getRequest().getMethod() +
+                        " " + response.getRequest().getLocalUri() +
+                        " should respond with status code " + status +
+                        ", responded: " + response.getStatusCode() + "\n\n" +
+                        "Response body:\n" + response.getContent());
+            }
+        }
+
+        static class Message {
+            final String importantMessage;
+
+            public Message(String msg) {
+                this.importantMessage = msg;
+            }
+        }
+
+        final Random rand = new Random();
+        final Gson gson = new Gson();
+
+        final Message[] MESSAGES = new Message[]{
+                new Message("Message " + rand.nextInt()),
+                new Message("Message " + rand.nextInt()),
+                new Message("Message " + rand.nextInt()),
+        };
+
+        final String[] JSON_MESSAGES = new String[]{
+                gson.toJson(MESSAGES[0]),
+                gson.toJson(MESSAGES[1]),
+                gson.toJson(MESSAGES[2]),
+        };
+
+        final String MESSAGE = "/message";
+
+
+        @DynamicTest
+        final DynamicTesting[] dt = new DynamicTesting[]{
+                () -> testPostMessage(JSON_MESSAGES[0]),
+                () -> testGetMessage(MESSAGES[0]),
+
+                () -> testPostMessage(JSON_MESSAGES[1]),
+                () -> testGetMessage(MESSAGES[1]),
+
+                () -> testPostMessage(JSON_MESSAGES[2]),
+                () -> testPostMessage(JSON_MESSAGES[2]),
+                () -> testGetMessage(MESSAGES[2]),
+                () -> testGetMessage(MESSAGES[2]),
+        };
+
+        CheckResult testPostMessage(String jsonMessage) {
+            HttpResponse response = post(MESSAGE, jsonMessage).send();
+
+            throwIfIncorrectStatusCode(response, 200);
+
+            return correct();
+        }
+
+        CheckResult testGetMessage(Message message) {
+            HttpResponse response = get(MESSAGE).send();
+
+            throwIfIncorrectStatusCode(response, 200);
+
+            expect(response.getContent()).asJson().check(
+                    isObject()
+                            .value("importantMessage", isString(message.importantMessage)));
+
+            return correct();
+        }
+    }
+  learner_created: false
+feedback_link: https://hyperskill.org/learn/step/15218#comment
+status: Solved
+feedback:
+  message: Congratulations!
+  time: Thu, 04 Nov 2021 19:23:33 UTC
+record: -1
