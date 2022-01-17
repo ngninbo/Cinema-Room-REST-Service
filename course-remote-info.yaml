@@ -3,7 +3,7 @@ hyperskill_project:
   ide_files: https://stepik.org/media/attachments/lesson/539847/additional_files.json
   is_template_based: false
   use_ide: true
-update_date: Thu, 06 Jan 2022 18:54:25 UTC
+update_date: Mon, 17 Jan 2022 10:13:27 UTC
 stages:
 - id: 945
   step: 13375
@@ -238,6 +238,12 @@ topics:
     theory_id: 3570
   - title: Exception handling
     theory_id: 3552
+  - title: 'Hashing: overview'
+    theory_id: 9831
+  - title: Hash function
+    theory_id: 10878
+  - title: Hash table
+    theory_id: 13054
   - title: Threads as objects
     theory_id: 4875
   - title: Custom threads
@@ -250,6 +256,10 @@ topics:
     theory_id: 3610
   - title: Thread synchronization
     theory_id: 3557
+  - title: The Set interface
+    theory_id: 3575
+  - title: The Map interface
+    theory_id: 3558
   - title: Collections and thread-safety
     theory_id: 4984
   - title: Thread-safe maps

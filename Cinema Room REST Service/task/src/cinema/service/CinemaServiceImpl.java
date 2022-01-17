@@ -73,16 +73,9 @@ public class CinemaServiceImpl implements CinemaService {
             Ticket ticket = purchasedTicket.getTicket();
             Seat seat = new Seat(ticket.getRow(), ticket.getColumn(), false);
             seatList.add(seat);
-            returnTicket = new HashMap<>();
-            returnTicket.put("returned_ticket", ticket);
+            returnTicket = Collections.singletonMap("returned_ticket", ticket);
             ticketList.add(ticket);
-            ticketList.sort((t1, t2) -> {
-                if (t1.equals(t2)) {
-                    return 0;
-                } else {
-                    return -1;
-                }
-            });
+            ticketList.sort((t1, t2) -> t1.equals(t2) ? 0 : -1);
 
             purchasedTicketMap.remove(key, purchasedTicket);
             currentIncome -= ticket.getPrice();

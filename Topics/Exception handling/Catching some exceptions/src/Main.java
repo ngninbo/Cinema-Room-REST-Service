@@ -6,6 +6,11 @@ public class Main {
 
     public static void methodCatchingSomeExceptions() {
         // invoke methodThrowingExceptions here and catch some types of exceptions
+        try {
+            methodThrowingExceptions();
+        } catch (ArrayIndexOutOfBoundsException | NumberFormatException ex) {
+            System.out.println(ex.getClass().getSimpleName());
+        }
     }
 
     /* Do not change code below */
