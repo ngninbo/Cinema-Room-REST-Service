@@ -6,9 +6,8 @@ import java.util.Map;
 
 public interface CinemaService {
 
-    PurchasedTicket purchase(Purchase purchase);
+    Purchase purchase(BookedSeat bookedSeat);
     Cinema getCinemaInfo();
-    boolean validate(Purchase purchase);
     Map<String, Ticket> refund(Map<String, String> token);
-    Stats getStats();
+    Map<String, Integer> getStats();
 }

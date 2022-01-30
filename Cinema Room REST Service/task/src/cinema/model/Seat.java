@@ -1,6 +1,6 @@
 package cinema.model;
 
-public class Seat extends Purchase {
+public class Seat extends BookedSeat {
 
     private boolean isBooked;
 

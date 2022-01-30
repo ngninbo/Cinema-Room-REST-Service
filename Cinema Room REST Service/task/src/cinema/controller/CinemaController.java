@@ -1,11 +1,11 @@
 package cinema.controller;
 
+import cinema.model.BookedSeat;
 import cinema.model.Cinema;
 import cinema.model.Purchase;
-import cinema.model.PurchasedTicket;
 import cinema.model.Ticket;
 import cinema.service.CinemaService;
-import cinema.util.Message;
+import cinema.util.CinemaUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.Map;
-import java.util.Optional;
+
+import static cinema.util.CinemaData.*;
 
 @RestController
 public class CinemaController {
@@ -30,18 +31,18 @@ public class CinemaController {
     }
 
     @PostMapping("/purchase")
-    public ResponseEntity<?> purchase(@RequestBody Purchase purchase) {
+    public ResponseEntity<?> purchase(@RequestBody BookedSeat bookedSeat) {
 
-        if (cinemaService.validate(purchase)) {
-            PurchasedTicket ticket = cinemaService.purchase(purchase);
+        if (CinemaUtil.validate(bookedSeat)) {
+            Purchase ticket = cinemaService.purchase(bookedSeat);
             if (ticket != null) {
                 return new ResponseEntity<>(ticket, HttpStatus.OK);
             } else {
-                return new ResponseEntity<>(Collections.singletonMap("error", Message.PURCHASE_ERROR),
+                return new ResponseEntity<>(Collections.singletonMap("error", PURCHASE_ERROR),
                         HttpStatus.BAD_REQUEST);
             }
         } else {
-            return new ResponseEntity<>(Collections.singletonMap("error", Message.OUT_OF_BOUND_ERROR),
+            return new ResponseEntity<>(Collections.singletonMap("error", OUT_OF_BOUND_ERROR),
                     HttpStatus.BAD_REQUEST);
         }
     }
@@ -53,7 +54,7 @@ public class CinemaController {
         if (refundTicket != null) {
             return new ResponseEntity<>(refundTicket, HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(Collections.singletonMap("error", Message.WRONG_TOKEN), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(Collections.singletonMap("error", WRONG_TOKEN), HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -63,7 +64,7 @@ public class CinemaController {
         if (!password.trim().isEmpty()) {
             return new ResponseEntity<>(cinemaService.getStats(), HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(Collections.singletonMap("error", Message.WRONG_PASSWORD),
+            return new ResponseEntity<>(Collections.singletonMap("error", WRONG_PASSWORD),
                     HttpStatus.UNAUTHORIZED);
         }
     }

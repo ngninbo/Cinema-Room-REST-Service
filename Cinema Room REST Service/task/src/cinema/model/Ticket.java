@@ -2,7 +2,7 @@ package cinema.model;
 
 import java.util.Objects;
 
-public class Ticket extends Purchase {
+public class Ticket extends BookedSeat {
 
     private int price;
 

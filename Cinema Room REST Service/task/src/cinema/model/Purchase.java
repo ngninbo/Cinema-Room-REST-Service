@@ -1,46 +1,28 @@
 package cinema.model;
 
-import java.util.Objects;
-
 public class Purchase {
 
-    private int row;
-    private int column;
+    private String token;
+    private Ticket ticket;
 
-    public Purchase() {
+    public Purchase(String token, Ticket ticket) {
+        this.token = token;
+        this.ticket = ticket;
     }
 
-    public Purchase(int row, int column) {
-        this.row = row;
-        this.column = column;
+    public String getToken() {
+        return token;
     }
 
-    public int getRow() {
-        return row;
+    public void setToken(String token) {
+        this.token = token;
     }
 
-    public void setRow(int row) {
-        this.row = row;
+    public Ticket getTicket() {
+        return ticket;
     }
 
-    public int getColumn() {
-        return column;
-    }
-
-    public void setColumn(int column) {
-        this.column = column;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Purchase)) return false;
-        Purchase purchase = (Purchase) o;
-        return getRow() == purchase.getRow() && getColumn() == purchase.getColumn();
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getRow(), getColumn());
+    public void setTicket(Ticket ticket) {
+        this.ticket = ticket;
     }
 }
