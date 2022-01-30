@@ -58,9 +58,9 @@ public class CinemaController {
     }
 
     @PostMapping("/stats")
-    public ResponseEntity<?> statistic(@RequestParam("password") Optional<String> password) {
+    public ResponseEntity<?> statistic(@RequestParam(defaultValue = "", required = false) String password) {
 
-        if (password.isPresent() && !"".equals(password.get())) {
+        if (!password.trim().isEmpty()) {
             return new ResponseEntity<>(cinemaService.getStats(), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(Collections.singletonMap("error", Message.WRONG_PASSWORD),
